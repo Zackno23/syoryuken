@@ -34,7 +34,7 @@ class ViewController: UIViewController, AVAudioPlayerDelegate{
     override func viewDidLoad() {
         super.viewDidLoad()
         Shuffle()
-        print(ShuffleCommand[0])
+        
         
         ryu.image = UIImage(named: "attak1")
         // Do any additional setup after loading the view.
@@ -56,6 +56,7 @@ class ViewController: UIViewController, AVAudioPlayerDelegate{
     
     @IBAction func command(_ sender: UIButton) {
         sender.isEnabled = false
+        
         if sender.titleLabel?.text! == correctCommand[commandCount] && commandCount < 3{
             commandCount += 1
         }else if sender.titleLabel?.text! == correctCommand[commandCount] && commandCount == 3{
@@ -74,8 +75,8 @@ class ViewController: UIViewController, AVAudioPlayerDelegate{
                 audioPlayer.delegate = self
                 audioPlayer.prepareToPlay()
             }
+            let time = DispatchTime.now()
             for i in 1 ... 20{
-                let time = DispatchTime.now()
                 DispatchQueue.main.asyncAfter(deadline: time + 0.1 * Double(i)) {
                     self.ryu.image = UIImage(named: "attak\(i)")
                     if i == 20{
